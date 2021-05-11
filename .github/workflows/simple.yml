@@ -19,3 +19,9 @@ jobs:
             import platform
             print(platform.processor())
           shell: python
+    
+    get-pwd:
+      runs-on: ubuntu-latest
+      steps: 
+        - name: Get pwd
+          run: pwd
