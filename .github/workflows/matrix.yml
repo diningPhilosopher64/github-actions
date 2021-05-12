@@ -12,7 +12,7 @@ jobs:
       - name: Changing node version
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 8
 
       - name: Log node version
         run: node -v
