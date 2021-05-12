@@ -17,8 +17,8 @@ jobs:
       max-parallel: 2
       # If set to true, if the job fails for one of the versions
       # the result would be fail for all jobs 
-      fail-fast: true
-    # This value will be grabbed from the matrix context.
+      fail-fast: false
+    # This value will be grabbed from the matrix
     runs-on: ${{matrix.os}}
     steps:
       - name: Log node version.
