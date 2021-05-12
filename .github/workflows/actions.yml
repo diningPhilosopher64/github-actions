@@ -1,6 +1,39 @@
 name: Actions workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - 'feature/*' #Will match feature/featA, feature/featB
+      # WIll not match feature/feat/A
+      # Because , '*' will not match the '/'
+
+      #The below will match anything after feature/ ie.
+      # Matches feature/feat/A , feature/featureA, feature/featB etc.
+      - 'feature/**'
+      - '!feature/featC'
+
+    tags:
+      - v1
+      - v2
+
+    paths:
+      - '**.js'
+      - '!filename.js'
+    
+    # paths-ignore:
+    #   - "docs/**"
+
+
+
+  # pull_request:
+  #   branches:
+  #     - master
+
+
+  # schedule: 
+  # # Minute Hour DayOfMonth Month DayOfWeek
+  #   - cron: "* * * * *"
 
 jobs:
     run-github-actions:
