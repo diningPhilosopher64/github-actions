@@ -30,7 +30,7 @@ jobs:
         # We use the matrix context to grab the version.
         # from the node_version array in matrix block
         # Will iterate automatically
-          node-version: $${{matrix.node_version}}
+          node-version: ${{matrix.node_version}}
 
       - name: Log node version
         run: node -v
