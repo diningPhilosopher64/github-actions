@@ -14,7 +14,7 @@ jobs:
         node_version: [6,8,10,12]
       # By default github would try to run all the versions in parallel
       # If we want we can limit it by setting the value as below.
-      max-parallel: 2
+      # max-parallel: 2
       # If set to true, if the job fails for one of the versions
       # the result would be fail for all jobs 
       fail-fast: false
