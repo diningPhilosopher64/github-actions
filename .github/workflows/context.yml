@@ -1,0 +1,16 @@
+on: push
+
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Dump github 
+        env:
+          JOB_CONTEXT: ${{ job }}
+        run: echo "$JOB_CONTEXT"
+     
