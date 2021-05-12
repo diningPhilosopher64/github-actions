@@ -4,7 +4,22 @@ on: push
 
 jobs:
   node-version:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+      # We have 3 OSs and 4 node versions 
+      # So, in total we have 12 environments to run on.
+        os: [macos-latest, windows-latest, ubuntu-latest]
+      #Variable name is upto us. It will be referred within in an expression
+      # in one of the steps
+        node_version: [6,8,10,12]
+      # By default github would try to run all the versions in parallel
+      # If we want we can limit it by setting the value as below.
+      max-parallel: 2
+      # If set to true, if the job fails for one of the versions
+      # the result would be fail for all jobs 
+      fail-fast: true
+    # This value will be grabbed from the matrix context.
+    runs-on: ${{matrix.os}}
     steps:
       - name: Log node version.
         run: node -v 
@@ -12,7 +27,10 @@ jobs:
       - name: Changing node version
         uses: actions/setup-node@v1
         with:
-          node-version: 8
+        # We use the matrix context to grab the version.
+        # from the node_version array in matrix block
+        # Will iterate automatically
+          node-version: $${{matrix.node_version}}
 
       - name: Log node version
         run: node -v
