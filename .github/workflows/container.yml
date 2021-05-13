@@ -1,0 +1,31 @@
+name: Container
+on: push
+
+jobs:
+  node-docker:
+    runs-on: ubuntu-latest
+# By container defined in our job any step that we have would run inside the 
+# container and not on the VM
+# The way to provide a container on dockerhub is :
+# If we are going to pick node alpine version from the 
+# url : https://hub.docker.com/_/node
+# Pick <username>:<imageVersion> . In this case its as below:
+    # container:  node:13.5.0-alpine3.10
+# Another way to initialize : 
+    # container:
+    #   image: node:13.5.0-alpine3.10
+    #   env: 
+    #     BLA: BLA
+    #   ports:
+    #     - port1
+    #     - port2
+    #   volumes:
+    #     - Add_volume_mapping: here
+    #   options: --cpus 1 --host ........
+    container:
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: Log node version
+        run: |
+          node -v 
+          cat /etc/os-release

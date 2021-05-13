@@ -6,20 +6,28 @@ jobs:
   node-version:
     strategy:
       matrix:
-      # We have 3 OSs and 4 node versions 
-      # So, in total we have 12 environments to run on.
         os: [macos-latest, windows-latest, ubuntu-latest]
-      #Variable name is upto us. It will be referred within in an expression
-      # in one of the steps
         node_version: [6,8,10,12,14]
-      # By default github would try to run all the versions in parallel
-      # If we want we can limit it by setting the value as below.
-      # max-parallel: 2
-      # If set to true, if the job fails for one of the versions
-      # the result would be fail for all jobs 
+
+        include:
+          - os: ubuntu-latest
+            node_version: 8
+            # This variable would exist only for ubuntu-latest and node version 8
+            # For other combinations, it would be null or empty string.
+            is_ubuntu_8: "true"
+
+        exclude:
+          - os: ubuntu-latest
+            node_version: 6
+          
+          - os: macos-latest
+            node_version: 8
+
       fail-fast: false
     # This value will be grabbed from the matrix
     runs-on: ${{matrix.os}}
+    env:
+      IS_UBUNTU_8: ${{matrix.is_ubuntu_8}}
     steps:
       - name: Log node version.
         run: node -v 
